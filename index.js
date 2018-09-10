@@ -1,4 +1,4 @@
-module.exports.handler = (event, context, callback) => {
+module.exports.handler = async (event, context, callback) => {
   const Cosmic = require('cosmicjs')
   const api = Cosmic()
   const bucket = api.bucket({
