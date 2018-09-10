@@ -1,11 +1,17 @@
 module.exports.handler = (event, context, callback) => {
+  const Cosmic = require('cosmicjs')
+  const api = Cosmic()
+  const bucket = api.bucket({
+    slug: 'creative-agency'
+  })
+  const objects = (await bucket.getObjects()).objects
   const response = {
     statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'text/plain'
     },
-    body: 'Hello world! Custom message: ' + process.env.CUSTOM_MESSAGE + ' Event body: ' + (event ? event.body : null)
+    body: JSON.stringify(objects)
   };
   callback(null, response);
 }
